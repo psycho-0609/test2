@@ -11,7 +11,7 @@ router.get('/',async (req,res)=>{
     let client = await MongoClient.connect(url);
     let dbo = client.db("asmdb");
     let result = await dbo.collection("products").find({}).toArray();
-    res.render('product',{products:result});
+    res.render('index',{products:result});
 });
 router.get('/delete',async (req,res)=>{
     let id = req.query.id;
@@ -22,7 +22,7 @@ router.get('/delete',async (req,res)=>{
     await dbo.collection("products").deleteOne(condition);
     //
     let results = await dbo.collection("products").find({}).toArray();
-    res.render('product',{products:results});
+    res.render('index',{products:results});
 });
 router.get('/insert',async(req,res)=>{
     res.render('insertProduct');
@@ -38,7 +38,7 @@ router.post('/doInsert',async(req,res)=>{
     await dbo.collection("products").insertOne(newProduct);
     console.log(newProduct);
     let results = await dbo.collection("products").find({}).toArray();
-    res.render('product',{products:results});
+    res.render('index',{products:results});
 });
 router.get('/update',async(req,res)=>
 {
@@ -64,7 +64,7 @@ router.post('/doUpdate', async(req,res)=>{
     await dbo.collection("products").updateOne(condition,newValues);
     //
     let results = await dbo.collection("products").find({}).toArray();
-    res.render('product',{products:results});
+    res.render('index',{products:results});
 });
 
 
