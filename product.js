@@ -21,8 +21,9 @@ router.get('/delete',async (req,res)=>{
     let dbo = client.db("asmdb");
     await dbo.collection("products").deleteOne(condition);
     //
-    let results = await dbo.collection("products").find({}).toArray();
-    res.render('index',{products:results});
+    // let results = await dbo.collection("products").find({}).toArray();
+    // res.render('index',{products:results});
+    res.redirect('/');
 });
 router.get('/insert',async(req,res)=>{
     res.render('insertProduct');
@@ -37,8 +38,9 @@ router.post('/doInsert',async(req,res)=>{
     let newProduct = {name : nameValue, author : authorValue, price: priceValue,detail:detailValue};
     await dbo.collection("products").insertOne(newProduct);
     console.log(newProduct);
-    let results = await dbo.collection("products").find({}).toArray();
-    res.render('index',{products:results});
+    // let results = await dbo.collection("products").find({}).toArray();
+    // res.render('index',{products:results});
+    res.redirect('/');
 });
 router.get('/update',async(req,res)=>
 {
@@ -63,8 +65,9 @@ router.post('/doUpdate', async(req,res)=>{
     let dbo = client.db("asmdb");
     await dbo.collection("products").updateOne(condition,newValues);
     //
-    let results = await dbo.collection("products").find({}).toArray();
-    res.render('index',{products:results});
+    // let results = await dbo.collection("products").find({}).toArray();
+    // res.render('index',{products:results});
+    res.redirect('/');
 });
 
 
